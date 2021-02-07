@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="gratch.Start"
+             Title="Головна"
+             Visual="Material"
+             Appearing="Start_Appear">
+    <Frame Style="{StaticResource frameStyle_NoColor}">
+        <StackLayout>
+
+            <StackLayout BackgroundColor="#eeeeee">
+                <Image Source="@drawable/gratch" ScaleY="0.85"
+                       Scale="0.9"/>
+            </StackLayout>
+            <StackLayout Style="{StaticResource stackStyle}"
+                     Padding="8">
+                <Label x:Name="Label1"
+                   Text="Сьогодні чергує:"
+                   HorizontalOptions="Start"
+                   FontSize="Title" 
+                   TextColor="#212121"
+                   />
+                <Entry x:Name="Entry1"
+                   Text="[Список відсутній]"
+                   MaxLength="50" 
+                   IsSpellCheckEnabled="False" 
+                   IsReadOnly="True"
+                   TextColor="#212121"
+                   />
+                <Picker Style="{StaticResource pickerStyle}"
+                   x:Name="Picker1"
+                   Title="Група"
+                   ItemsSource="{Binding Groups}"
+                   SelectedIndexChanged="Picker1_ValChanged"/>
+            </StackLayout>
+            <StackLayout Style="{StaticResource stackStyle}">
+                <Button x:Name="Button1"
+                    VerticalOptions="End"
+                    Text="Інструкція"
+                    Style="{StaticResource buttonStyle}"/>
+                <Button x:Name="Button2"
+                    VerticalOptions="End"
+                    Text="Інфо" 
+                    Style="{StaticResource buttonStyle}"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</ContentPage>

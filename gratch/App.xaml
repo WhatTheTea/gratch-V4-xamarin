@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="gratch.App" 
+             UserAppTheme="Light">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#03A9F4"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+            <Style x:Key="stackStyle" TargetType="StackLayout">
+                <Setter Property="Padding" Value="8"/>
+            </Style>
+            <Style x:Key="frameStyle_NoColor" TargetType="Frame">
+                <Setter Property="Padding" Value="4"/>
+            </Style>
+            <Style x:Key="frameStyle_Color" TargetType="Frame">
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="BackgroundColor" Value="#eeeeee"/>
+            </Style>
+            <Style x:Key="pickerStyle" TargetType="Picker">
+                <Setter Property="TextColor" Value="#212121"/>
+                <Setter Property="TitleColor" Value="#212121"/>
+            </Style>
+            <Style x:Key="listStyle" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="#eeeeee"/>
+                <Setter Property="SelectionMode" Value="None"/>
+            </Style>
+            <Style x:Key="labelStyle1" TargetType="Label">
+                <Setter Property="FontSize" Value="Body"/>
+                <Setter Property="TextColor" Value="#212121"/>
+            </Style>
+            <Style x:Key="GLook_Label" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="BackgroundColor" Value="#fafafa"/>
+                <Setter Property="FontSize" Value="Body"/>
+                <Setter Property="HeightRequest" Value="35"/>
+            </Style>
+            <Style x:Key="GLook_Button" TargetType="Button">
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="BackgroundColor" Value="#fafafa"/>
+                <Setter Property="FontSize" Value="Body"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="Visual" Value="Default"/>
+                <Setter Property="TextColor" Value="#252525"/>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
