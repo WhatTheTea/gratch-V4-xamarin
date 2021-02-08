@@ -18,7 +18,6 @@ using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Xml.Serialization;
-using Xamarin.Forms.Markup;
 using System.Windows.Input;
 
 namespace gratch
@@ -93,17 +92,19 @@ namespace gratch
                 Text = content,
                 Style = (Style)Application.Current.Resources["GLook_Label"]
             };
-            buff.GestureRecognizers.Add(new TapGestureRecognizer { NumberOfTapsRequired = 1, Command = TapCommand, CommandParameter = row });
+            //buff.GestureRecognizers.Add(new TapGestureRecognizer { NumberOfTapsRequired = 1, Command = TapCommand, CommandParameter = row });
+            buff.GestureRecognizers.Add(new DragGestureRecognizer { CanDrag = true });
+            buff.GestureRecognizers.Add(new DropGestureRecognizer { AllowDrop = true });
             grid1.Children.Add(buff, col, row);
         }
-        ICommand TapCommand => new Command((object arg) =>
+        /*ICommand TapCommand => new Command((object arg) =>
                                              {
                                                  PunishUnit(arg);
                                              });
         async public void PunishUnit(object ReturnedRow)
         {
             await DisplayAlert("lol", ReturnedRow.ToString(), "OK");
-        }
+        }*/
         public void Start(int group)
         {
             holidays = Tools.hday_init();
