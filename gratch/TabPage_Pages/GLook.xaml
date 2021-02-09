@@ -4,7 +4,8 @@
              x:Class="gratch.GLook"
              Title="Графік"
              Visual="Material"
-             Appearing="GLook_Activated">
+             Appearing="GLook_Activated"
+             >
 
     <Frame Style="{StaticResource frameStyle_NoColor}">
 
@@ -58,7 +59,11 @@
                             <Label Grid.Column="1" Grid.Row="0"
                                    Style="{StaticResource GLook_Label}"
                                    Text="Графік не створено"
-                                           />
+                                           >
+                                <Label.GestureRecognizers>
+                                    <DragGestureRecognizer CanDrag="True"/>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </Grid>
                     </StackLayout>
                 </ScrollView>

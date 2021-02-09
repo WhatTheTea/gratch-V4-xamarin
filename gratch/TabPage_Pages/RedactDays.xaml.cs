@@ -16,7 +16,6 @@ namespace gratch
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RedactDays : ContentPage
     {
-        public static event EventHandler PageChanging;
         private Dictionary<DayOfWeek, Switch> SwitchByDay;
         private Collection<string> DaysWindows;
         private XDocument xDays = null;
@@ -63,7 +62,7 @@ namespace gratch
             switch (DaysWindowPicker.SelectedIndex)
             {
                 case 0:
-                    PageChanging.Invoke(2, new EventArgs());
+                    MainPage.Pages[this.TabIndex] = new RedactG();
                     break;
                 case 1:
                     //do nothing

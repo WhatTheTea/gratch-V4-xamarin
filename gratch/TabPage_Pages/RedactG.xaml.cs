@@ -15,20 +15,26 @@ namespace gratch
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RedactG : ContentPage
     {
+        public static event EventHandler GraphChanged;
         public ObservableCollection<string> Units { get; set; }
         public Collection<string> GraphWindows { get; set; }
         private static DateTime Now => DateTime.Now; //:DDDD
         private string[] holidays = new string[7];
         private int _UnitId = 1, maxUnit = 0;
-        public static event EventHandler PageChanging;
         public RedactG()
         {
             InitializeComponent();
-
+            GraphChanged += RedactG_GraphChanged;
             GraphWindows = new Collection<string> { "Редактор списку чергових", "Редактор вихідних" };
 
             Start();
         }
+
+        private void RedactG_GraphChanged(object sender, EventArgs e)
+        {
+            //MainPage.Pages[2] = new GLook();
+        }
+
         private void Start()
         {
             Units = new ObservableCollection<string>();
@@ -124,6 +130,7 @@ namespace gratch
             xgDoc.Root.Add(new XElement("date", Now.Month));
             group = (int)step;
             Tools.SaveHidden(Tools.gPath, xgDoc);
+            RedactG.GraphChanged.Invoke(null, new EventArgs());
         }
 
         public void ImportGraph(StreamReader list)
@@ -276,7 +283,7 @@ namespace gratch
             {
                 Step.Maximum = 2;
             }
-            new gratch.Start().FillGroups();
+            //new gratch.Start().FillGroups();
         }
         async void ClearFiles()
         {
@@ -289,6 +296,7 @@ namespace gratch
                 if (Tools.is_list) File.Delete(Tools.lPath);
                 if (Tools.is_graph) File.Delete(Tools.gPath);
                 if (Tools.is_days) File.Delete(Tools.dPath);
+                                                                                                                 //TODO: Excel delete
                 Start();
                 _UnitId = 1;
                 maxUnit = 0;
@@ -302,6 +310,7 @@ namespace gratch
                 await DisplayAlert("Days", Tools.is_days.ToString(), "Ок");
 #endif
                 await DisplayAlert("Інфо", "Графік було успішно видалено", "Ок");
+                GraphChanged.Invoke(null, new EventArgs());
             }
         }
         void Step_ValueChanged(object sender, EventArgs e)
@@ -327,7 +336,13 @@ namespace gratch
                     //do nothing
                     break;
                 case 1:
-                    PageChanging.Invoke(2, new EventArgs());
+                    if (Tools.is_graph)
+                    {
+                        MainPage.Pages[this.TabIndex] = new RedactDays();
+                    } else
+                    {
+                        WindowPicker.SelectedIndex = 0;
+                    }
                     break;
                 default:
                     throw new ArgumentException("Invalid WindowPicker index");

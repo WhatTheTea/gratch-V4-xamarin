@@ -47,6 +47,7 @@ namespace gratch
             void CreateFile()
             {
                 XDocument xDays = Tools.is_days ? XDocument.Load(Tools.dPath) : new XDocument(
+                    new XElement("Days",
                     new XElement(DayOfWeek.Monday.ToString(), false),
                     new XElement(DayOfWeek.Tuesday.ToString(), false),
                     new XElement(DayOfWeek.Wednesday.ToString(), false),
@@ -54,7 +55,7 @@ namespace gratch
                     new XElement(DayOfWeek.Friday.ToString(), false),
                     new XElement(DayOfWeek.Saturday.ToString(), true),
                     new XElement(DayOfWeek.Sunday.ToString(), true)
-                    );
+                    ));
                 Tools.SaveHidden(Tools.dPath, xDays);
                 if (Tools.is_graph) gratch.RedactG.CreateGraph();
             }

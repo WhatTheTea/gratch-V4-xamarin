@@ -5,5 +5,6 @@
              Visual="Material"
              BackgroundColor="#FFFFFF" 
              BarBackgroundColor="#3F51B5" 
-             BarTextColor="#FFFFFF"/>
+             BarTextColor="#FFFFFF">
+</TabbedPage>
 
