@@ -23,9 +23,13 @@ namespace gratch
             InitializeComponent();
             Groups = new ObservableCollection<int>();
             this.BindingContext = this;
+            RedactG.GraphChanged += RedactG_GraphChanged;
             FillGroups();
             init(1);
         }
+
+        private void RedactG_GraphChanged(object sender, EventArgs e) { FillGroups(); }
+        
         private void init(int group)
         {
             DateTime now = DateTime.Now;

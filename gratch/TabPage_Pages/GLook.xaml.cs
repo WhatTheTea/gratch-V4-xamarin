@@ -45,7 +45,16 @@ namespace gratch
             this.BindingContext = this;
             grid1_start();
             if (Tools.is_graph) Start((int?)picker1.SelectedItem ?? 1);
+
+            RedactG.GraphChanged += RedactG_GraphChanged;
         }
+
+        private void RedactG_GraphChanged(object sender, EventArgs e)
+        {
+            grid1_start();
+            Start((int?)picker1.SelectedItem ?? 1);
+        }
+
         public void FillGroups()
         {
             if (Tools.is_graph)
@@ -141,13 +150,14 @@ namespace gratch
         }
         private void GLook_Activated(object sender, EventArgs e)
         {
-            if (Tools.is_graph)
+            /*if (Tools.is_graph)
             {
                 grid1.Children.Clear();
                 grid1_start();
                 picker1.ItemsSource = null;
                 Start((int?)picker1.SelectedItem ?? 1);
-            }
+            }*/
+           //if(Tools.is_graph) MainPage.Pages[TabIndex] = new GLook();
         }
         private void picker1_changed(object sender, EventArgs e)
         {
