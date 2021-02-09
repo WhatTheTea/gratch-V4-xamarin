@@ -20,7 +20,6 @@ namespace gratch
         private static DateTime Now => DateTime.Now; //:DDDD
         private string[] holidays = new string[7];
         private int _UnitId = 1, maxUnit = 0;
-        public static event EventHandler PageChanging;
         public RedactG()
         {
             InitializeComponent();
@@ -289,6 +288,7 @@ namespace gratch
                 if (Tools.is_list) File.Delete(Tools.lPath);
                 if (Tools.is_graph) File.Delete(Tools.gPath);
                 if (Tools.is_days) File.Delete(Tools.dPath);
+                                                                                                                 //TODO: Excel delete
                 Start();
                 _UnitId = 1;
                 maxUnit = 0;
@@ -327,7 +327,13 @@ namespace gratch
                     //do nothing
                     break;
                 case 1:
-                    PageChanging.Invoke(2, new EventArgs());
+                    if (Tools.is_graph)
+                    {
+                        MainPage.Pages[this.TabIndex] = new RedactDays();
+                    } else
+                    {
+                        WindowPicker.SelectedIndex = 0;
+                    }
                     break;
                 default:
                     throw new ArgumentException("Invalid WindowPicker index");

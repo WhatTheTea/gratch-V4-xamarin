@@ -12,32 +12,20 @@ namespace gratch
 {
     public partial class MainPage : TabbedPage
     {
-        public static ObservableCollection<Page> Pages = new ObservableCollection<Page> { new GLook(), new Start(), new RedactG() };
+        public static ObservableCollection<Page> Pages = new ObservableCollection<Page> { new RedactG(), new Start(), new GLook() };
         public MainPage()
         {
             InitializeComponent();
-            MainPageRefresh();
-            RedactDays.PageChanging += RedactDays_PageChanging;
-            RedactG.PageChanging += RedactG_PageChanging;
-
+            MainPageRefresh(new object(), new EventArgs());
+            CurrentPage = Children[1];
+            Pages.CollectionChanged += MainPageRefresh;
         }
 
-        private void RedactG_PageChanging(object page, EventArgs e)
-        {
-            Pages[2] = new RedactDays();
-            MainPageRefresh((int)page);
-        }
-
-        private void RedactDays_PageChanging(object page, EventArgs e)
-        {
-            Pages[2] = new RedactG();
-            MainPageRefresh((int)page);
-        }
-        public void MainPageRefresh(int page = 1)
+        public void MainPageRefresh(object sender, EventArgs e) // sender = TabIndex, e = new EventArgs();
         {
             Children.Clear();
             for (int i = 0; i < Pages.Count; i++) Children.Add(Pages[i]);
-            CurrentPage = Children[page];
+            this.CurrentPage = Children[CurrentPage.TabIndex];
         }
 
 

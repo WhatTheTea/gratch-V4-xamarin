@@ -21,7 +21,6 @@ namespace gratch
         public Start()
         {
             InitializeComponent();
-
             Groups = new ObservableCollection<int>();
             this.BindingContext = this;
             FillGroups();
