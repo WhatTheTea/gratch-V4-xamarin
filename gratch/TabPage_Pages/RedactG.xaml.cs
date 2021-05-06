@@ -16,6 +16,7 @@ namespace gratch
     public partial class RedactG : ContentPage
     {
         public static event EventHandler GraphChanged;
+        public static event EventHandler<PageChangingEventArgs> PageChanged;
         public ObservableCollection<string> Units { get; set; }
         public Collection<string> GraphWindows { get; set; }
         private static DateTime Now => DateTime.Now; //:DDDD
@@ -24,15 +25,8 @@ namespace gratch
         public RedactG()
         {
             InitializeComponent();
-            GraphChanged += RedactG_GraphChanged;
             GraphWindows = new Collection<string> { "Редактор списку чергових", "Редактор вихідних" };
-
             Start();
-        }
-
-        private void RedactG_GraphChanged(object sender, EventArgs e)
-        {
-            //MainPage.Pages[2] = new GLook();
         }
 
         private void Start()
@@ -338,7 +332,8 @@ namespace gratch
                 case 1:
                     if (Tools.is_graph)
                     {
-                        MainPage.Pages[this.TabIndex] = new RedactDays();
+                        //MainPage.Pages[this.TabIndex] = new RedactDays();
+                        PageChanged.Invoke(new RedactG(), new PageChangingEventArgs(new RedactDays()));
                     } else
                     {
                         WindowPicker.SelectedIndex = 0;
