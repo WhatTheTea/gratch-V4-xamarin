@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="gratch.GLook"
+             Title="Графік"
+             Visual="Material"
+             Appearing="GLook_Activated"
+             >
+
+    <Frame Style="{StaticResource frameStyle_NoColor}">
+
+        <StackLayout>
+            <Frame Style="{StaticResource frameStyle_Color}">
+                <Picker x:Name="picker1"
+                        Title="Група чергових"
+                        SelectedIndexChanged="picker1_changed"
+                        ItemsSource="{Binding Groups}"/>
+            </Frame>
+            <Frame Style="{StaticResource frameStyle_Color}"
+                       VerticalOptions="FillAndExpand"
+                       x:Name="frame1">
+                <ScrollView>
+                    <StackLayout>
+                        <Grid VerticalOptions="Start">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".05*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".18*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame BackgroundColor="#dddddd"
+                               Padding="0">
+                                <Label Text="Дата"
+                               Style="{StaticResource labelStyle1}"
+                               />
+                            </Frame>
+
+                            <Frame BackgroundColor="#dddddd"
+                               Padding="0"
+                               Grid.Column="1">
+                                <Label 
+                               Style="{StaticResource labelStyle1}"
+                               Text="Черговий"
+                               />
+                            </Frame>
+                        </Grid>
+
+                        <Grid x:Name="grid1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.12*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".18*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="1" Grid.Row="0"
+                                   Style="{StaticResource GLook_Label}"
+                                   Text="Графік не створено"
+                                           >
+                                <Label.GestureRecognizers>
+                                    <DragGestureRecognizer CanDrag="True"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+            </Frame>
+
+            <Frame Style="{StaticResource frameStyle_Color}"
+                       VerticalOptions="End">
+
+                <StackLayout 
+                        Style="{StaticResource stackStyle}"
+                        Orientation="Horizontal">
+
+                    <Button Style="{StaticResource buttonStyle}"
+                        Text="Стандарт"
+                        Clicked="Button_Clicked"/>
+
+                    <Button Style="{StaticResource buttonStyle}"
+                                Text="Excel"
+                                Clicked="Button_Clicked_1"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+
+    </Frame>
+</ContentPage>
