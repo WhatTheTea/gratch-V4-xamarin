@@ -31,7 +31,6 @@ namespace gratch
         {
             Children.Clear();
             for (int i = 0; i < Pages.Count; i++) Children.Add(Pages[i]);
-            //this.CurrentPage = Children[CurrentPage.TabIndex];
         }
 
         public void PageChanged(object sender, PageChangingEventArgs args) // sender = from, args = where
@@ -39,10 +38,7 @@ namespace gratch
             Pages[2] = args.TargetPage;
             ChildrenRefresh();
             CurrentPage = Children[Pages.IndexOf(args.TargetPage)];
-            /*Children.Remove(sender as Page);
-            Children.Add(args.TargetPage);
-            CurrentPage = Children[CurrentPage.TabIndex];*/
-            //CurrentPage = targetpages.SingleOrDefault();
+            
         }
 
 
