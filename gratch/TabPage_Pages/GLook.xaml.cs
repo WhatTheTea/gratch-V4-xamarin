@@ -161,8 +161,10 @@ namespace gratch
         }
         private void picker1_changed(object sender, EventArgs e)
         {
-            grid1.Children.Clear();
-            if (Tools.is_graph) Start((int?)picker1.SelectedItem ?? 1);
+            
+                grid1.Children.Clear();
+                if (Tools.is_graph) Start((int?)picker1.SelectedItem ?? 1);
+          
         }
 
         private void Button_Clicked(object sender, EventArgs e) // стандарт

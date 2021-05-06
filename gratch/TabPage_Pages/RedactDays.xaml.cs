@@ -16,6 +16,7 @@ namespace gratch
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RedactDays : ContentPage
     {
+        public static event EventHandler<PageChangingEventArgs> PageChanged;
         private Dictionary<DayOfWeek, Switch> SwitchByDay;
         private Collection<string> DaysWindows;
         private XDocument xDays = null;
@@ -51,9 +52,9 @@ namespace gratch
                     new XElement(DayOfWeek.Sunday.ToString(), true)
                     );
 
-            foreach(var @switch in SwitchByDay.Values.Zip(SwitchByDay.Keys,Tuple.Create))
+            foreach(var @switch in SwitchByDay.Values.Zip(SwitchByDay.Keys,Tuple.Create))//Загрузка дней из файла
             {
-                @switch.Item1.IsToggled = bool.Parse(xDays.Root.Element(@switch.Item2.ToString()).Value);
+                @switch.Item1.IsToggled = bool.Parse(xDays.Root.Element(@switch.Item2.ToString()).Value); 
             }
         }
 
@@ -62,7 +63,7 @@ namespace gratch
             switch (DaysWindowPicker.SelectedIndex)
             {
                 case 0:
-                    MainPage.Pages[this.TabIndex] = new RedactG();
+                    PageChanged.Invoke(new RedactDays(), new PageChangingEventArgs(new RedactG()));
                     break;
                 case 1:
                     //do nothing
