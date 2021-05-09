@@ -19,6 +19,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Xml.Serialization;
 using System.Windows.Input;
+using NPOI.OpenXmlFormats.Spreadsheet;
 
 namespace gratch
 {
@@ -26,19 +27,11 @@ namespace gratch
     public partial class GLook : ContentPage
     {
         private string[] holidays = new string[7];
-        public List<int> Groups = new List<int>();
-        /*
-                private readonly string[] Days =
-                {
-                    "Нд",
-                    "Пн",
-                    "Вт",
-                    "Ср",
-                    "Чт",
-                    "Пт",
-                    "Сб"
-                };
-        */
+        public static List<int> Groups
+        {
+            get { return groups; }
+        }
+        private static List<int> groups = new List<int>();
         public GLook()
         {
             InitializeComponent();
@@ -59,10 +52,10 @@ namespace gratch
         {
             if (Tools.is_graph)
             {
-                Groups.Clear();
+                groups.Clear();
                 XmlDocument lDoc = new XmlDocument();
                 lDoc.Load(Tools.lPath);
-                for (int i = 1; i <= lDoc.DocumentElement.ChildNodes.Count; i++) Groups.Add(i);
+                for (int i = 1; i <= lDoc.DocumentElement.ChildNodes.Count; i++) groups.Add(i);
             }
         }
         void grid1_start()
@@ -118,7 +111,7 @@ namespace gratch
         {
             holidays = Tools.hday_init();
             FillGroups();
-            picker1.ItemsSource = Groups;
+            picker1.ItemsSource = groups;
 
             XmlDocument gDoc = new XmlDocument();
             gDoc.Load(Tools.gPath);
@@ -132,7 +125,7 @@ namespace gratch
                     {
                         foreach (XmlNode unit in node.ChildNodes)
                         {
-                            if (Int32.Parse(unit.Attributes.GetNamedItem("day").InnerText) < 10)
+                            if (int.Parse(unit.Attributes.GetNamedItem("day").InnerText) < 10)
                             {
                                 grid1_add($"0{unit.Attributes.GetNamedItem("day").InnerText}", 0, i);
                                 grid1_add(unit.InnerText, 1, i);
